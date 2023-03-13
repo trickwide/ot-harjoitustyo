@@ -1,6 +1,7 @@
 # Ohjelmistotekniikan harjoitustyö
 
 Tämä on **Ohjelmistotekniikan harjoitustyö**, jonka tekijä on _Ville Saastamoinen_.
+Tein tämän rivin muutoksen paikallisessa repositoriossa.
 
 ## Tehtävät
 ### Viikko 1
