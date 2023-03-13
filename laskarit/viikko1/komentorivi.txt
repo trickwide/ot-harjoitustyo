@@ -1,0 +1,354 @@
+.
+├── Desktop -> /home/ad/home/v/vilsaast/Desktop
+├── Documents -> /home/ad/home/v/vilsaast/Documents
+├── Downloads -> /home/ad/home/v/vilsaast/Downloads
+├── hello.sh
+├── kurssit
+│   └── ot2023
+│       └── viikko1
+│           └── unicafe
+│               ├── poetry.lock
+│               ├── pyproject.toml
+│               └── src
+│                   ├── index.py
+│                   ├── kassapaate.py
+│                   ├── maksukortti.py
+│                   └── tests
+│                       ├── __init__.py
+│                       └── maksukortti_test.py
+├── lapio
+│   ├── kouluprojektit
+│   │   ├── lapio.txt
+│   │   └── uusi_tiedosto.txt
+│   ├── lapio_vko2.txt
+│   ├── ostoslista.txt
+│   └── tarina.txt
+├── Lapio-website
+│   ├── assets
+│   │   └── Seitsemän_veljestä.png
+│   ├── index.html
+│   ├── position.html
+│   ├── style.css
+│   ├── styles.css
+│   └── toinen.html
+├── Linus_Torvalds
+├── linus.txt
+├── Music
+├── ot-harjoitustyo
+│   ├── laskarit
+│   │   ├── gitlog.txt
+│   │   ├── komentorivi.txt
+│   │   └── laskarit
+│   └── README.md
+├── ot_viikko1
+│   ├── eka.txt
+│   ├── kolmas.txt
+│   ├── stuff
+│   │   └── joku_tiedosto.txt
+│   └── tiedostoja
+│       ├── file22
+│       └── file3
+├── Pictures
+├── Public
+├── R
+│   └── x86_64-pc-linux-gnu-library
+│       └── 4.2
+├── snap
+│   ├── firefox
+│   │   ├── 1749
+│   │   ├── 1775
+│   │   ├── common
+│   │   └── current -> 1775
+│   ├── snapd-desktop-integration
+│   │   ├── 14
+│   │   ├── common
+│   │   └── current -> 14
+│   └── snap-store
+│       ├── 582
+│       ├── common
+│       └── current -> 582
+├── static-website
+│   ├── assets
+│   │   └── cv.jpg
+│   ├── css
+│   │   └── styles.css
+│   └── index.html
+├── Templates
+├── testi
+│   └── laulum.me
+│       ├── books
+│       │   └── tekis-2017.json
+│       ├── components
+│       │   ├── BackButton.tsx
+│       │   ├── Button.module.css
+│       │   ├── Button.tsx
+│       │   ├── ErrorBoundary.tsx
+│       │   ├── Footer.tsx
+│       │   ├── Header.tsx
+│       │   ├── Icon.module.css
+│       │   ├── Icon.tsx
+│       │   ├── Input.module.css
+│       │   ├── Input.tsx
+│       │   ├── Link.module.css
+│       │   ├── Link.tsx
+│       │   ├── Logo.module.css
+│       │   ├── Logo.tsx
+│       │   ├── SongList.tsx
+│       │   └── UpdateOverlay.tsx
+│       ├── global.d.ts
+│       ├── lib
+│       │   ├── app.css
+│       │   ├── books.ts
+│       │   ├── getTelegramUrl.ts
+│       │   ├── slugify.ts
+│       │   ├── songs.ts
+│       │   ├── useInput.ts
+│       │   ├── useMounted.ts
+│       │   └── usePWAPrompt.ts
+│       ├── next.config.js
+│       ├── package.json
+│       ├── package-lock.json
+│       ├── pages
+│       │   ├── 404.tsx
+│       │   ├── _app.tsx
+│       │   ├── book
+│       │   │   └── [name].tsx
+│       │   ├── _document.tsx
+│       │   ├── index.tsx
+│       │   ├── _offline.tsx
+│       │   └── songs
+│       │       └── [slug].tsx
+│       ├── public
+│       │   ├── favicon.ico
+│       │   ├── icons
+│       │   │   ├── apple-touch-icon.png
+│       │   │   ├── icon-192-android.png
+│       │   │   ├── icon-192.png
+│       │   │   ├── icon-512.png
+│       │   │   └── icon.svg
+│       │   ├── icon.svg
+│       │   ├── logo.svg
+│       │   ├── manifest.json
+│       │   └── robots.txt
+│       ├── README.md
+│       ├── songs
+│       │   ├── ace_of_spades.md
+│       │   ├── a_finnish_drinking_song.md
+│       │   ├── aku_ankka.md
+│       │   ├── alfred_j_kwak.md
+│       │   ├── alkoholen.md
+│       │   ├── all_star.md
+│       │   ├── all_the_drinks.md
+│       │   ├── always_look_on_the_bright_side_of_life.md
+│       │   ├── ankronikka.md
+│       │   ├── aqua_vera.md
+│       │   ├── assarit.md
+│       │   ├── barbie_girl.md
+│       │   ├── bohemian_rhapsody.md
+│       │   ├── brännvin_vatten.md
+│       │   ├── call_me_maybe.md
+│       │   ├── de_brevitae_vitae.md
+│       │   ├── dirlandaa.md
+│       │   ├── dodo-sorsa.md
+│       │   ├── dokataan.md
+│       │   ├── drink_your_beer.md
+│       │   ├── drunken_sailor.md
+│       │   ├── eesti_(on_my_mind).md
+│       │   ├── eino_leinon_juomalaulu.md
+│       │   ├── ei_tippa_tapa.md
+│       │   ├── e-p_n_kone_ja_tarvike.md
+│       │   ├── euforia.md
+│       │   ├── eurovision_juomalaulu.md
+│       │   ├── eye_of_the_tiger.md
+│       │   ├── far_over_the_misty_mountains_cold.md
+│       │   ├── fast_food_song.md
+│       │   ├── felix.md
+│       │   ├── finlandia.md
+│       │   ├── finlandssvensk_snapsvisa.md
+│       │   ├── fredmans_sång_no_8.md
+│       │   ├── f-u-k-s-i.md
+│       │   ├── gurulah.md
+│       │   ├── gurulassa.md
+│       │   ├── hauki_ja_viina.md
+│       │   ├── hei_vahtimestari.md
+│       │   ├── helan_gor.md
+│       │   ├── hell_and_gore.md
+│       │   ├── henkilokunta.md
+│       │   ├── HEYYEAYAAEYAAAEYA.md
+│       │   ├── huutolaatta.md
+│       │   ├── hypermedialaulu.md
+│       │   ├── hyvät_ystävät.md
+│       │   ├── ievan_polkka.md
+│       │   ├── internationaali.md
+│       │   ├── internationalen.md
+│       │   ├── intian_kuu.md
+│       │   ├── jaara.md
+│       │   ├── jallulujah.md
+│       │   ├── jallu.md
+│       │   ├── jallus_magic_starlight.md
+│       │   ├── jallutähden_alla.md
+│       │   ├── jallutyttö.md
+│       │   ├── jaloviinaa.md
+│       │   ├── jarjestoasiantuntijan_runtulaulu.md
+│       │   ├── javamies.md
+│       │   ├── jesussoldat.md
+│       │   ├── jos_eukkosi_kieltää_sua_juomasta.md
+│       │   ├── joutsenlaulu.md
+│       │   ├── juodaan_viinaa.md
+│       │   ├── juomalaulu.md
+│       │   ├── kaks_kisälliä.md
+│       │   ├── kalliolle_kumpulamme.md
+│       │   ├── kalmarevisan.md
+│       │   ├── kandin_metsästys.md
+│       │   ├── kansainvälinen.md
+│       │   ├── käpy.md
+│       │   ├── karhuviinaa.md
+│       │   ├── ken_on_fuksi.md
+│       │   ├── kirkossa.md
+│       │   ├── klurre_kädelläsi.md
+│       │   ├── klurrekärpänen.md
+│       │   ├── klusterilainen.md
+│       │   ├── klustronikka.md
+│       │   ├── koff.md
+│       │   ├── ko-ko-ko-koskenkorvaa.md
+│       │   ├── koodaillaan.md
+│       │   ├── koska_meitä_käsketään.md
+│       │   ├── kotiviini.md
+│       │   ├── krapularyyppy.md
+│       │   ├── krimin_kriisi.md
+│       │   ├── kun_mä_kuolen.md
+│       │   ├── lapin_kulta_kaanon.md
+│       │   ├── lapsuuden_toverille.md
+│       │   ├── lärvit.md
+│       │   ├── lasi_täyttyy_oluesta.md
+│       │   ├── laulu_uudelle.md
+│       │   ├── leikkaamaan.md
+│       │   ├── leipuri_hiiva.md
+│       │   ├── lenin-setä_asuu_venäjällä.md
+│       │   ├── leppätalo.md
+│       │   ├── leukojen_välliin.md
+│       │   ├── livet_är_härligt.md
+│       │   ├── lonkéro.md
+│       │   ├── luonnontieteilijän_uni.md
+│       │   ├── luukkaisen_poika.md
+│       │   ├── maamme.md
+│       │   ├── maija.md
+│       │   ├── mandariinimies.md
+│       │   ├── matin_syntymäpäivälaulu.md
+│       │   ├── matkalaulu.md
+│       │   ├── meksikon_pikapano.md
+│       │   ├── melkki_kaatuu.md
+│       │   ├── mielihaluja.md
+│       │   ├── mikan_faijan_bsd.md
+│       │   ├── minä_soitan_harmonikkaa.md
+│       │   ├── minnet.md
+│       │   ├── minun_juomani_kossu_on.md
+│       │   ├── mockin_päällä_mocki.md
+│       │   ├── mökkitie.md
+│       │   ├── muinaisten_valssi.md
+│       │   ├── murheellisten_bittien_maa.md
+│       │   ├── muumit_teema.md
+│       │   ├── my_favourite_drinks.md
+│       │   ├── nämä_lääkkeet.md
+│       │   ├── napsulaulu.md
+│       │   ├── neuvostoliiton_hymni.md
+│       │   ├── never_gonna_give_you_up.md
+│       │   ├── niin_minä_neitonen_sinulle_laulan.md
+│       │   ├── nisti_ja_nööri.md
+│       │   ├── nocturne.md
+│       │   ├── no_onkos_tullut_kesä.md
+│       │   ├── numa_numa.md
+│       │   ├── nyt-kokonaisuus.md
+│       │   ├── nyt_ryypätään.md
+│       │   ├── oispa_kaljaa.md
+│       │   ├── olof_palme-snapvisan.md
+│       │   ├── olutkaanon.md
+│       │   ├── ölvisa.md
+│       │   ├── oman_kullan_silmät.md
+│       │   ├── onomatopoeettinen_alkoholiliike.md
+│       │   ├── oodi_kumpulalle.md
+│       │   ├── oodi_sitoutumattomuudelle.md
+│       │   ├── paavi_ja_sulttaani.md
+│       │   ├── paljon_jallua.md
+│       │   ├── peppi_pitkätossu.md
+│       │   ├── pienet_käärmeet.md
+│       │   ├── pienet_konjakit.md
+│       │   ├── pikkukakkosen_posti.md
+│       │   ├── pohjois-karjala.md
+│       │   ├── pokémon_teema.md
+│       │   ├── pokémon_theme.md
+│       │   ├── puheenjohtajan_juomalaulu.md
+│       │   ├── pumppulaulu.md
+│       │   ├── punschen_kommer.md
+│       │   ├── pyöreän_pöydän_ritarit.md
+│       │   ├── raittiuslaulu.md
+│       │   ├── rakastuin_mä_klusteriin.md
+│       │   ├── rakenteisiin_asti.md
+│       │   ├── rati_riti_ralla.md
+│       │   ├── riti_tira_ralla.md
+│       │   ├── romanssi.md
+│       │   ├── rosvo_roope.md
+│       │   ├── ryyppää_vaan.md
+│       │   ├── ryyppy_saapuu.md
+│       │   ├── sähkö-atk_laulu.md
+│       │   ├── sahtilaulu.md
+│       │   ├── salatequila.md
+│       │   ├── sandstorm.md
+│       │   ├── sauvakirkon_polttaja.md
+│       │   ├── se_kolmas_vesilaulu.md
+│       │   ├── sen_nimi_oli_jallu.md
+│       │   ├── siffervisan.md
+│       │   ├── sinä_lähdit_pois.md
+│       │   ├── sisään.md
+│       │   ├── sitsipeto_on_irti.md
+│       │   ├── skrillexin_mökkitie.md
+│       │   ├── skumppaa_punkun_kaa.md
+│       │   ├── snapsien_kaveri.md
+│       │   ├── soome.md
+│       │   ├── sörnai_gusha.md
+│       │   ├── still_alive.md
+│       │   ├── suhteellisen_rivakka_turkulainen_juomalaulu.md
+│       │   ├── syphilis.md
+│       │   ├── tähtipölyä.md
+│       │   ├── taistelu_jaska_theme.md
+│       │   ├── take_on_me.md
+│       │   ├── tämän_talon_onneksi.md
+│       │   ├── tänään_otetaan_alkoholittomia.md
+│       │   ├── tänään_otetaan.md
+│       │   ├── teinilaulu.md
+│       │   ├── teletappien_juomalaulu.md
+│       │   ├── the_abc_song.md
+│       │   ├── tietoliikennelaulu.md
+│       │   ├── tieto_value_for_life.md
+│       │   ├── tukkari_reggae.md
+│       │   ├── turkulainen_juomalaulu.md
+│       │   ├── unelmia_ja_toimistohommia.md
+│       │   ├── unkari-kokonaisuus.md
+│       │   ├── unkarin_viini.md
+│       │   ├── urhometso.md
+│       │   ├── vaakuna_herba_ja_koskenkorva.md
+│       │   ├── valomerkin_jälkeen.md
+│       │   ├── varpunen_jouluaamuna.md
+│       │   ├── vem_i_helvete.md
+│       │   ├── vesipoikien_marssi.md
+│       │   ├── viidestoista_vuosi.md
+│       │   ├── viinaa_vetta.md
+│       │   ├── viinamaa.md
+│       │   ├── vi_ska_dricka_hela_natten.md
+│       │   ├── vitutuslaulu.md
+│       │   ├── vit_vecka.md
+│       │   ├── vodka_vodka.md
+│       │   ├── volga.md
+│       │   ├── we_are_number_one_but_everytime_one_is_said_everyone_takes_a_drink.md
+│       │   ├── wonderwall.md
+│       │   ├── yliopistoinnovaatio.md
+│       │   ├── yogi_bear.md
+│       │   └── yths.md
+│       ├── tsconfig.json
+│       └── types
+│           ├── book.d.ts
+│           └── song.d.ts
+├── testi.txt
+└── Videos
+
+56 directories, 295 files
