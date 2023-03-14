@@ -17,7 +17,7 @@ class Kassapaate:
     def _paivita_myydyt_lounaat(self, hinta):
         if hinta == self.EDULLINEN:
             self.edulliset += 1
-        elif hinta == self.MAUKAS:
+        else:
             self.maukkaat += 1
 
     def syo_edullisesti_kateisella(self, maksu):
