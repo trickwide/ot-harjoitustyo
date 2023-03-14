@@ -13,4 +13,5 @@ Tein tämän rivin muutoksen paikallisessa repositoriossa.
 ### Viikko 2
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
+
 [Työaikakirjanpito](dokumentaatio/tuntikirjanpito.md)
