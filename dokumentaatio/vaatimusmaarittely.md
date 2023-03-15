@@ -20,7 +20,8 @@ Alkuvaiheessa sovelluksella on vain yksi käyttäjärooli eli _normaali käyttä
 
 ### Kirjautumisen jälkeen
 
-- Käyttäjä näkee budjettinsa eriteltynä: _tulot_, _menot_, _budjettia jäljellä_
+- Käyttäjä näkee budjettinsa eriteltynä: _tulot_, _menot_, _budjetti_
+- Käyttäjä voi syöttää budjettinsa
 - Käyttäjä voi syöttää uuden tulon
   - Järjestelmään syötetty tulo näkyy vain nykyiselle kirjautuneelle käyttäjälle
 - Käyttäjä voi syöttää uuden menon
