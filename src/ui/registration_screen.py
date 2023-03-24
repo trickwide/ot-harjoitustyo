@@ -4,7 +4,7 @@ import customtkinter
 class RegistrationScreen:
     """The RegistrationScreen class is the UI for the registration screen."""
     
-    def __init__(self, root):
+    def __init__(self, root, show_login_view):
         """The constructor of the RegistrationScreen class.
         
         Args:
@@ -12,11 +12,11 @@ class RegistrationScreen:
         """
         
         self._root = root
+        self._show_login_view = show_login_view
         self._frame = None
-        self._first_name_entry = None
-        self._surname_entry = None
         self._username_entry = None
         self._password_entry = None
+        self._password_confirmation_entry = None
         
         self._init_screen()
         
@@ -71,7 +71,7 @@ class RegistrationScreen:
         register_button.grid(padx=5, pady=5, sticky=constants.EW)
         
         # Note to self, add command to the login button and functionality
-        already_registered_button = customtkinter.CTkButton(master=self._frame, corner_radius=20, text="Already Registered? Sign in.")
+        already_registered_button = customtkinter.CTkButton(master=self._frame, corner_radius=20, text="Already Registered? Sign in.", command=self._show_login_view)
         already_registered_button.grid(column=0, padx=5, pady=5, sticky=constants.EW)
         
         self._frame.grid_columnconfigure(0, weight=1, minsize=400)

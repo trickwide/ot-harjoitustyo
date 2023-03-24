@@ -4,13 +4,14 @@ import customtkinter
 class LoginScreen:
     """The LoginScreen class is the UI for the login screen."""
     
-    def __init__(self, root):
+    def __init__(self, root, show_registration_view):
         """The constructor of the LoginScreen class.
         
         Args:
             root (tk.Tk): The root of the UI.
         """
         self._root = root
+        self._show_registration_view = show_registration_view
         self._frame = None
         self._username_entry = None
         self._password_entry = None

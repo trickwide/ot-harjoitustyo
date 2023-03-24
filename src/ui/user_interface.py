@@ -17,10 +17,18 @@ class UI:
         """Function to start the UI."""
         self._show_registration_screen()
         
+    def _hide_current_view(self):
+        if self._current_view:
+            self._current_view.destroy()
+
+        self._current_view = None
+
     def _show_login_screen(self):
-        self._current_view = LoginScreen(self._root)
+        self._hide_current_view()
+        self._current_view = LoginScreen(self._root, self._show_registration_screen)
         self._current_view.pack()
     
     def _show_registration_screen(self):
+        self._hide_current_view()
         self._current_view = RegistrationScreen(self._root, self._show_login_screen)
         self._current_view.pack()
