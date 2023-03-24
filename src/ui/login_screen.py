@@ -1,4 +1,5 @@
-from tkinter import ttk, StringVar, constants
+from tkinter import ttk, constants
+import customtkinter
 
 class LoginScreen:
     """The LoginScreen class is the UI for the login screen."""
@@ -19,6 +20,10 @@ class LoginScreen:
     def pack(self):
         """Function to pack the UI."""
         self._frame.pack(fill=constants.X)
+        
+    def destroy(self):
+        """Function to destroy the UI."""
+        self._frame.destroy()
 
     def validate_login():
         """Function to validate the user's login credentials."""
@@ -26,7 +31,7 @@ class LoginScreen:
     
     def _init_username_frame(self):
         username_label = ttk.Label(master=self._frame, text="Username")
-        self._username_entry = ttk.Entry(master=self._frame)
+        self._username_entry = customtkinter.CTkEntry(master=self._frame)
         
         username_label.grid(padx=5, pady=5, sticky=constants.W)
         self._username_entry.grid(padx=5, pady=5, sticky=constants.EW)
@@ -35,7 +40,7 @@ class LoginScreen:
     def _init_password_frame(self):
         password_label = ttk.Label(master=self._frame, text="Password")
 
-        self._password_entry = ttk.Entry(master=self._frame)
+        self._password_entry = customtkinter.CTkEntry(master=self._frame, show="*")
 
         password_label.grid(padx=5, pady=5, sticky=constants.W)
         self._password_entry.grid(padx=5, pady=5, sticky=constants.EW)
@@ -47,7 +52,7 @@ class LoginScreen:
         self._init_password_frame()
         
         # Note to self, add command to the login button
-        login_button = ttk.Button(master=self._frame, text="Login")
+        login_button =  customtkinter.CTkButton(master=self._frame, corner_radius=20, text="Login")
         
         self._frame.grid_columnconfigure(0, weight=1, minsize=400)
         
