@@ -1,5 +1,7 @@
 from tkinter import ttk, constants
 import customtkinter
+import hashlib
+from database import create_connection, add_user
 
 class RegistrationScreen:
     """The RegistrationScreen class is the UI for the registration screen."""
@@ -28,10 +30,30 @@ class RegistrationScreen:
         """Function to destroy the UI."""
         self._frame.destroy()
 
-    def validate_registration():
+    def validate_registration(self):
         """Function to validate the user's registration credentials."""
-        pass
-    
+        username = self._username_entry.get()
+        password = self._password_entry.get()
+        password_confirmation = self._password_confirmation_entry.get()
+        
+        if password == password_confirmation:
+            # Hash the password
+            hashed_password = hashlib.sha256(password.encode()).hexdigest()
+            
+            # Insert the user into database
+            conn = create_connection("budget_tracker.db")
+            add_user(conn, username, hashed_password)
+            conn.close()
+            
+            # Destroy the registration screen and show the login screen
+            self.destroy()
+            self._show_login_view()
+            
+        else:
+            # Display error message, if the passwords don't match
+            error_label = customtkinter.CTkLabel(master=self._frame, text="Passwords do not match!", foreground="red")
+            error_label.grid(padx=5, pady=5, sticky=constants.W)
+            
     def _init_username_frame(self):
         username_label = ttk.Label(master=self._frame, text="Username")
         self._username_entry = customtkinter.CTkEntry(master=self._frame)
@@ -50,16 +72,8 @@ class RegistrationScreen:
         self._password_confirmation_entry = customtkinter.CTkEntry(master=self._frame, show="*")
         
         password_confirmation_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._password_confirmation_entry.grid(padx=5, pady=5, sticky=constants.EW)       
-    
-    def _init_screen(self):
-        self._frame = ttk.Frame(master=self._root)
+        self._password_confirmation_entry.grid(padx=5, pady=5, sticky=constants.EW)
         
-        self._init_first_name_frame()
-        self._init_surname_frame()
-        self._init_username_frame()
-        self._init_password_frame()
-    
     def _init_screen(self):
         self._frame = ttk.Frame(master=self._root)
         
