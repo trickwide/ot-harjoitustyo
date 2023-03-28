@@ -2,6 +2,7 @@ from tkinter import ttk, constants
 import customtkinter
 import hashlib
 from database import create_connection, add_user
+import re
 
 class RegistrationScreen:
     """The RegistrationScreen class is the UI for the registration screen."""
@@ -30,30 +31,54 @@ class RegistrationScreen:
         """Function to destroy the UI."""
         self._frame.destroy()
 
+    def is_username_valid(self, username):
+        """Function to check if the username is valid."""
+        return len(username) >= 4
+    
+    def is_password_valid(self, password):
+        """Function to check if the password is valid."""
+        if len(password) < 12:
+            return False
+        
+        has_uppercase = any(c.isupper() for c in password)
+        has_number = any(c.isdigit() for c in password)
+        has_special = bool(re.search(r"[!@#$%^&*(),.?\":{}|<>]", password))
+        
+        return has_uppercase and has_number and has_special
+    
     def validate_registration(self):
         """Function to validate the user's registration credentials."""
         username = self._username_entry.get()
         password = self._password_entry.get()
         password_confirmation = self._password_confirmation_entry.get()
         
-        if password == password_confirmation:
-            # Hash the password
-            hashed_password = hashlib.sha256(password.encode()).hexdigest()
-            
-            # Insert the user into database
-            conn = create_connection("budget_tracker.db")
-            add_user(conn, username, hashed_password)
-            conn.close()
-            
-            # Destroy the registration screen and show the login screen
-            self.destroy()
-            self._show_login_view()
-            
-        else:
-            # Display error message, if the passwords don't match
-            error_label = customtkinter.CTkLabel(master=self._frame, text="Passwords do not match!", foreground="red")
+        if not self.is_username_valid(username):
+            error_label = customtkinter.CTkLabel(master=self._frame, text="Username must be at least 4 characters long.", fg_color="red")
             error_label.grid(padx=5, pady=5, sticky=constants.W)
+            return
+          
+        if not self.is_password_valid(password):
+            error_label = customtkinter.CTkLabel(master=self._frame, text="Password contain at least 12 characters, with 1 capital letter, 1 number, and 1 special character.", fg_color="red")
+            error_label.grid(padx=5, pady=5, sticky=constants.W)
+            return
+        
+        if  password != password_confirmation:
+            error_label = customtkinter.CTkLabel(master=self._frame, text="Passwords do not match.", fg_color="red")
+            error_label.grid(padx=5, pady=5, sticky=constants.W)
+            return
+        
+        # Hash the password
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
+        
+        # Insert the user into database
+        conn = create_connection("budget_tracker.db")
+        add_user(conn, username, hashed_password)
+        conn.close()
             
+        # Destroy the registration screen and show the login screen
+        self.destroy()
+        self._show_login_view()
+        
     def _init_username_frame(self):
         username_label = ttk.Label(master=self._frame, text="Username")
         self._username_entry = customtkinter.CTkEntry(master=self._frame)
