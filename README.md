@@ -10,40 +10,42 @@ Sovelluksen käyttäminen vaatii vähintään Python-version `3.8`. Sovelluksen 
 
 ## Dokumentaatio
 
-[Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
+- [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 
-[Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
+- [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
 
-[Changelog](dokumentaatio/changelog.md)
+- [Changelog](dokumentaatio/changelog.md)
 
 ## Asennus
 
-1. Asenna riippuvuudet komennolla:
+⚠️ **Huom! Sovellus hyödyntää Pythonin UI-kirjastoa [customtkinter](https://github.com/TomSchimansky/CustomTkinter). Kirjaston asentaminen tapahtuu alla olevalla komennolla. Kirjasto tulee asentaa myös virtuaaliympäristössä, jotta testit toimivat.**
+
+1. Asenna customtkinter -kirjasto komennolla:
+
+```bash
+pip install customtkinter
+
+tai
+
+pip3 install customtkinter
+```
+
+2. Asenna riippuvuudet komennolla:
 
 ```bash
 poetry install
 ```
 
-2. Suorita vaadittavat alustustoimenpiteet komennolla:
+3. Suorita vaadittavat alustustoimenpiteet komennolla:
 
 ```bash
 poetry run invoke build
 ```
 
-3. Käynnistä sovellus komennolla:
+4. Käynnistä sovellus komennolla:
 
 ```bash
 poetry run invoke start
-```
-
-⚠️ **Huom! Mikäli sovellus herjaa customtkinter Python UI-kirjaston puuttumisesta, kirjaston asentamiseen voit käyttää jompaakumpaa alla olevista komennoista:**
-
-```bash
-pip install customtkinter
-```
-
-```bash
-pip3 install customtkinter
 ```
 
 ## Komentorivitoiminnot
