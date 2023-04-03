@@ -78,12 +78,16 @@ class RegistrationScreen:
         
         # Insert the user into database
         conn = create_connection("budget_tracker.db")
-        add_user(conn, username, hashed_password)
+        result = add_user(conn, username, hashed_password)
         conn.close()
-            
-        # Destroy the registration screen and show the login screen
-        self.destroy()
-        self._show_login_view()
+        
+        if result == "UserExists":
+            self.display_error_message("Username already exists.")
+            return
+        else:
+            # Destroy the registration screen and show the login screen
+            self.destroy()
+            self._show_login_view()
         
     def _init_username_frame(self):
         username_label = ttk.Label(master=self._frame, text="Username")

@@ -41,10 +41,16 @@ def create_tables(conn):
 
 def add_user(conn, username, password):
         cursor = conn.cursor()
-        cursor.execute("""
+        cursor.execute("SELECT * FROM users WHERE username=?", (username,))
+        user = cursor.fetchone()
+        if user:
+            return "UserExists"
+        else:
+            cursor.execute("""
             INSERT INTO users (username, password) VALUES (?, ?)
         """, (username, password))
-        conn.commit()
+            conn.commit()
+            return "Success"
 
 def get_user(conn, username, password):
         cursor = conn.cursor()
