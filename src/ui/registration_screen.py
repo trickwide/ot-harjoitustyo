@@ -20,6 +20,7 @@ class RegistrationScreen:
         self._username_entry = None
         self._password_entry = None
         self._password_confirmation_entry = None
+        self._error_label = None
         
         self._init_screen()
         
@@ -31,6 +32,14 @@ class RegistrationScreen:
         """Function to destroy the UI."""
         self._frame.destroy()
 
+    def display_error_message(self, message):
+        if self._error_label:
+            self._error_label.destroy()
+            
+        self._error_label = ttk.Label(master=self._frame, text=message, foreground="red")
+        self._error_label.grid(padx=5, pady=5, sticky=constants.W)
+        self._root.after(5000, self._error_label.destroy)
+    
     def is_username_valid(self, username):
         """Function to check if the username is valid."""
         return len(username) >= 4
@@ -53,18 +62,15 @@ class RegistrationScreen:
         password_confirmation = self._password_confirmation_entry.get()
         
         if not self.is_username_valid(username):
-            error_label = customtkinter.CTkLabel(master=self._frame, text="Username must be at least 4 characters long.", fg_color="red")
-            error_label.grid(padx=5, pady=5, sticky=constants.W)
+            self.display_error_message("Username must be at least 4 characters long.")
             return
           
         if not self.is_password_valid(password):
-            error_label = customtkinter.CTkLabel(master=self._frame, text="Password contain at least 12 characters, with 1 capital letter, 1 number, and 1 special character.", fg_color="red")
-            error_label.grid(padx=5, pady=5, sticky=constants.W)
+            self.display_error_message("Password must contain at least 12 characters, with 1 capital letter, 1 number, and 1 special character.")
             return
         
         if  password != password_confirmation:
-            error_label = customtkinter.CTkLabel(master=self._frame, text="Passwords do not match.", fg_color="red")
-            error_label.grid(padx=5, pady=5, sticky=constants.W)
+            self.display_error_message("Passwords do not match.")
             return
         
         # Hash the password
