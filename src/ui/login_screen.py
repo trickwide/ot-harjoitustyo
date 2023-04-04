@@ -18,6 +18,7 @@ class LoginScreen:
         self._frame = None
         self._username_entry = None
         self._password_entry = None
+        self._error_label = None
         
         self._init_screen()
 
@@ -28,6 +29,14 @@ class LoginScreen:
     def destroy(self):
         """Function to destroy the UI."""
         self._frame.destroy()
+        
+    def display_error_message(self, message):
+        if self._error_label:
+            self._error_label.destroy()
+            
+        self._error_label = ttk.Label(master=self._frame, text=message, foreground="red")
+        self._error_label.grid(padx=5, pady=5, sticky=constants.W)
+        self._root.after(5000, self._error_label.destroy)
 
     def validate_login(self):
         """Function to validate the user's login credentials."""
@@ -50,7 +59,7 @@ class LoginScreen:
                 self.destroy()
             else:
                 # SHOW ERROR MESSAGE, needs to be added
-                pass
+                self.display_error_message("Invalid username or password")
     
     def _init_username_frame(self):
         username_label = ttk.Label(master=self._frame, text="Username")
@@ -77,6 +86,9 @@ class LoginScreen:
         # Note to self, add command to the login button
         login_button =  customtkinter.CTkButton(master=self._frame, corner_radius=20, text="Login", command=self.validate_login)
         
-        self._frame.grid_columnconfigure(0, weight=1, minsize=400)
-        
         login_button.grid(padx=5, pady=5, sticky=constants.EW)
+        
+        not_registered_button = customtkinter.CTkButton(master=self._frame, corner_radius=20, text="Not registered? Register here.", command=self._show_registration_view)
+        not_registered_button.grid(column=0, padx=5, pady=5, sticky=constants.EW)
+        
+        self._frame.grid_columnconfigure(0, weight=1, minsize=400)
