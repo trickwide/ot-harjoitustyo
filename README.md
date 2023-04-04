@@ -18,31 +18,19 @@ Sovelluksen käyttäminen vaatii vähintään Python-version `3.8`. Sovelluksen 
 
 ## Asennus
 
-⚠️ **Huom! Sovellus hyödyntää Pythonin UI-kirjastoa [customtkinter](https://github.com/TomSchimansky/CustomTkinter). Kirjaston asentaminen tapahtuu alla olevalla komennolla. Kirjasto tulee asentaa myös virtuaaliympäristössä, jotta testit toimivat.**
-
-1. Asenna customtkinter -kirjasto komennolla:
-
-```bash
-pip install customtkinter
-
-tai
-
-pip3 install customtkinter
-```
-
-2. Asenna riippuvuudet komennolla:
+1. Asenna riippuvuudet komennolla:
 
 ```bash
 poetry install
 ```
 
-3. Suorita vaadittavat alustustoimenpiteet komennolla:
+2. Suorita vaadittavat alustustoimenpiteet komennolla:
 
 ```bash
 poetry run invoke build
 ```
 
-4. Käynnistä sovellus komennolla:
+3. Käynnistä sovellus komennolla:
 
 ```bash
 poetry run invoke start
