@@ -79,6 +79,4 @@ def setup_database(db_file):
         create_tables(conn)
         conn.commit()
 
-if __name__ == "__main__":
-    setup_database("budget_tracker.db")
-    
+setup_database("budget_tracker.db")
