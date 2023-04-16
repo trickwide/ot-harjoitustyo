@@ -1,7 +1,6 @@
 from tkinter import ttk, constants
 import customtkinter
-import hashlib
-from database import create_connection, get_user
+from database.database import create_connection, get_user, hash_password
 
 class LoginScreen:
     """The LoginScreen class is the UI for the login screen."""
@@ -45,7 +44,7 @@ class LoginScreen:
         
         if username and password:
             # Hash the password
-            password_hash = hashlib.sha256(password.encode()).hexdigest()
+            password_hash = hash_password(password)
 
             # Create a connection to the database
             conn = create_connection("budget_tracker.db")
@@ -55,10 +54,10 @@ class LoginScreen:
             
             # If the user exists and password is correct, show the main window
             if user:
-                self._show_main_window()
+                user_id = user[0]
+                self._show_main_window(user_id)
                 self.destroy()
             else:
-                # SHOW ERROR MESSAGE, needs to be added
                 self.display_error_message("Invalid username or password")
     
     def _init_username_frame(self):

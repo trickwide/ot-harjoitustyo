@@ -1,8 +1,7 @@
 from tkinter import ttk, constants
 import customtkinter
-import hashlib
-from database import create_connection, add_user
-import re
+from database.database import create_connection, add_user, hash_password
+from validation.validation import is_username_valid, is_password_valid
 
 class RegistrationScreen:
     """The RegistrationScreen class is the UI for the registration screen."""
@@ -40,32 +39,17 @@ class RegistrationScreen:
         self._error_label.grid(padx=5, pady=5, sticky=constants.W)
         self._root.after(5000, self._error_label.destroy)
     
-    def is_username_valid(self, username):
-        """Function to check if the username is valid."""
-        return len(username) >= 4
-    
-    def is_password_valid(self, password):
-        """Function to check if the password is valid."""
-        if len(password) < 12:
-            return False
-        
-        has_uppercase = any(c.isupper() for c in password)
-        has_number = any(c.isdigit() for c in password)
-        has_special = bool(re.search(r"[!@#$%^&*(),.?\":{}|<>]", password))
-        
-        return has_uppercase and has_number and has_special
-    
     def validate_registration(self):
         """Function to validate the user's registration credentials."""
         username = self._username_entry.get()
         password = self._password_entry.get()
         password_confirmation = self._password_confirmation_entry.get()
         
-        if not self.is_username_valid(username):
+        if not is_username_valid(username):
             self.display_error_message("Username must be at least 4 characters long.")
             return
           
-        if not self.is_password_valid(password):
+        if not is_password_valid(password):
             self.display_error_message("Password must contain at least 12 characters, with 1 capital letter, 1 number, and 1 special character.")
             return
         
@@ -74,11 +58,11 @@ class RegistrationScreen:
             return
         
         # Hash the password
-        hashed_password = hashlib.sha256(password.encode()).hexdigest()
+        password_hash = hash_password(password)
         
         # Insert the user into database
         conn = create_connection("budget_tracker.db")
-        result = add_user(conn, username, hashed_password)
+        result = add_user(conn, username, password_hash)
         conn.close()
         
         if result == "UserExists":
