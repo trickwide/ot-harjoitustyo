@@ -1,5 +1,8 @@
 import sqlite3
 from sqlite3 import Error
+import hashlib
+
+
 
 def create_connection(db_file):
     """ Create a database connection to a SQLite database """
@@ -38,6 +41,9 @@ def create_tables(conn):
         cursor.execute(transactions_table)
     except Error as e:
         print(e)
+        
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
 
 def add_user(conn, username, password):
         cursor = conn.cursor()
@@ -72,6 +78,28 @@ def get_transactions(conn, user_id, limit=10):
             SELECT * FROM transactions WHERE user_id=? ORDER BY timestamp DESC LIMIT ?
         """, (user_id, limit))
         return cursor.fetchall()
+      
+def get_budget_summary(conn, user_id):
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT SUM(amount) FROM transactions WHERE user_id=? AND type=?
+    """, (user_id, "Budget"))
+    return cursor.fetchone()[0] or 0
+
+def get_expense_summary(conn, user_id):
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT SUM(amount) FROM transactions WHERE user_id=? AND type=?
+    """, (user_id, "Expense"))
+    return cursor.fetchone()[0] or 0
+
+def get_income_summary(conn, user_id):
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT SUM(amount) FROM transactions WHERE user_id=? AND type=?
+    """, (user_id, "Income"))
+    return cursor.fetchone()[0] or 0
+      
         
 def setup_database(db_file):
     conn = create_connection(db_file)
