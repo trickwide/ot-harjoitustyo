@@ -12,19 +12,19 @@ Alkuvaiheessa sovelluksella on vain yksi käyttäjärooli eli _normaali käyttä
 
 ### Ennen kirjautumista
 
-- Käyttäjä voi luoda järjestelmään käyttäjätunnuksen
+- Käyttäjä voi luoda järjestelmään käyttäjätunnuksen **TEHTY**
   - Käyttäjätunnuksen täytyy olla uniikki ja pituudeltaan vähintään 5 merkkiä
-- Käyttäjä voi kirjautua järjestelmään
+- Käyttäjä voi kirjautua järjestelmään **TEHTY**
   - Käyttäjä pääsee kirjautumaan järjestelmään, kun on syöttänyt olemassaolevan käyttäjätunnuksen ja salasanan kirjautumislomakkeelle
   - Mikäli käyttäjätunnusta ei ole olemassa, tai salasana ei täsmää, ilmoittaa järjestelmä tästä
 
 ### Kirjautumisen jälkeen
 
-- Käyttäjä näkee budjettinsa eriteltynä: _tulot_, _menot_, _budjetti_
-- Käyttäjä voi syöttää budjettinsa
-- Käyttäjä voi syöttää uuden tulon
+- Käyttäjä näkee budjettinsa eriteltynä: _tulot_, _menot_, _budjetti_ **TEHTY**
+- Käyttäjä voi syöttää budjettinsa **TEHTY**
+- Käyttäjä voi syöttää uuden tulon **TEHTY**
   - Järjestelmään syötetty tulo näkyy vain nykyiselle kirjautuneelle käyttäjälle
-- Käyttäjä voi syöttää uuden menon
+- Käyttäjä voi syöttää uuden menon **TEHTY**
   - Järjestelmään syötetty tulo näkyy vain nykyiselle kirjautuneelle käyttäjälle
 - Käyttäjä voi poistaa kirjaamansa tulon
 - Käyttäjä voi poistaa kirjaamansa menon
