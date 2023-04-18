@@ -12,6 +12,8 @@ Sovelluksen käyttäminen vaatii vähintään Python-version `3.8`. Sovelluksen 
 
 - [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 
+- [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
+
 - [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
 
 - [Changelog](dokumentaatio/changelog.md)
