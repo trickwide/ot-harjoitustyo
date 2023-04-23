@@ -26,8 +26,6 @@ class MainWindow:
         self._init_screen()
         self._update_info_labels()
         self._init_history_section()
-        self._init_log_out_button()
-        
 
     def pack(self):
         """Function to pack the UI."""
@@ -36,7 +34,7 @@ class MainWindow:
     def destroy(self):
         """Function to destroy the UI."""
         self._frame.destroy()
-        
+
     def log_out(self):
         """Function to log out the user, close the main window and open login window."""
         self.destroy()
@@ -130,6 +128,7 @@ class MainWindow:
         self._init_dropdown()
         self._init_entry_field()
         self._init_submit_button()
+        self._init_log_out_button()
         self._init_info_labels()
         self._init_history_section()
 
