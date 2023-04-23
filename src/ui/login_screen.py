@@ -1,6 +1,6 @@
 from tkinter import ttk, constants
 import customtkinter
-from database.database import create_connection, get_user, hash_password
+from validation.validation import validate_login
 
 
 class LoginScreen:
@@ -15,6 +15,7 @@ class LoginScreen:
         self._root = root
         self._show_registration_view = show_registration_view
         self._show_main_window = show_main_window
+        self.validate_login = validate_login
         self._frame = None
         self._username_entry = None
         self._password_entry = None
@@ -39,28 +40,9 @@ class LoginScreen:
         self._error_label.grid(padx=5, pady=5, sticky=constants.W)
         self._root.after(5000, self._error_label.destroy)
 
-    def validate_login(self):
-        """Function to validate the user's login credentials."""
-        username = self._username_entry.get()
-        password = self._password_entry.get()
-
-        if username and password:
-            # Hash the password
-            password_hash = hash_password(password)
-
-            # Create a connection to the database
-            conn = create_connection("budget_tracker.db")
-
-            # Get the user from the database
-            user = get_user(conn, username, password_hash)
-
-            # If the user exists and password is correct, show the main window
-            if user:
-                user_id = user[0]
-                self._show_main_window(user_id)
-                self.destroy()
-            else:
-                self.display_error_message("Invalid username or password")
+    def _validate_login(self, username, password, show_main_window, display_error_message, destroy):
+        validate_login(username, password, show_main_window,
+                       display_error_message, destroy)
 
     def _init_username_frame(self):
         username_label = ttk.Label(master=self._frame, text="Username")
@@ -84,9 +66,13 @@ class LoginScreen:
         self._init_username_frame()
         self._init_password_frame()
 
-        # Note to self, add command to the login button
         login_button = customtkinter.CTkButton(
-            master=self._frame, corner_radius=20, text="Login", command=self.validate_login)
+            master=self._frame, corner_radius=20, text="Login", command=lambda: self._validate_login(
+                self._username_entry.get(),
+                self._password_entry.get(),
+                self._show_main_window,
+                lambda msg: self.display_error_message(msg),
+                self.destroy))
 
         login_button.grid(padx=5, pady=5, sticky=constants.EW)
 
