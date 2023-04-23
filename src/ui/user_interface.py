@@ -39,5 +39,5 @@ class UI:
 
     def _show_main_window(self, user_id):
         self._hide_current_view()
-        self._current_view = MainWindow(self._root, user_id)
+        self._current_view = MainWindow(self._root, user_id, self._show_login_screen)
         self._current_view.pack()

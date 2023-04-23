@@ -6,7 +6,7 @@ from database.database import create_connection, add_transaction, get_transactio
 class MainWindow:
     """The MainWindow class is the UI for the main window after successful login."""
 
-    def __init__(self, root, user_id):
+    def __init__(self, root, user_id, show_login_screen):
         """The constructor of the MainWindow class.
 
         Args:
@@ -21,10 +21,13 @@ class MainWindow:
         self.total_expense = 0.0
         self.total_income = 0.0
         self.user_id = user_id
+        self._show_login_screen = show_login_screen
         self.conn = create_connection("budget_tracker.db")
         self._init_screen()
         self._update_info_labels()
         self._init_history_section()
+        self._init_log_out_button()
+        
 
     def pack(self):
         """Function to pack the UI."""
@@ -33,6 +36,11 @@ class MainWindow:
     def destroy(self):
         """Function to destroy the UI."""
         self._frame.destroy()
+        
+    def log_out(self):
+        """Function to log out the user, close the main window and open login window."""
+        self.destroy()
+        self._show_login_screen()
 
     def submit_value(self):
         """Function to submit the value entered in the entry field."""
@@ -111,6 +119,11 @@ class MainWindow:
             label.grid(row=i, column=0, padx=5, pady=5, sticky=constants.W)
 
         self._history_frame.grid(padx=5, pady=5, sticky=constants.EW)
+
+    def _init_log_out_button(self):
+        self._log_out_button = customtkinter.CTkButton(
+            master=self._frame, corner_radius=20, text="Log Out", command=self.log_out)
+        self._log_out_button.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_screen(self):
         self._frame = ttk.Frame(master=self._root)
