@@ -11,3 +11,8 @@
 - User can see their budget, income and expenses
 - User can submit budget, income and expenses
 - User can see 10 latest transactions
+
+## Week 5
+
+- User can log out from their account
+- Logging out directs user back to login screen
