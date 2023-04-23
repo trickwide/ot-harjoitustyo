@@ -1,6 +1,5 @@
 from tkinter import Tk
-from src.ui.user_interface import UI
-
+from ui.user_interface import UI # pylint: disable=import-error
 
 def main():
     window = Tk()
