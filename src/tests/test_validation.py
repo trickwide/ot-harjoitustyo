@@ -73,7 +73,7 @@ class TestValidation(unittest.TestCase):
             "Invalid username or password")
         show_main_window.assert_not_called()
         destroy.assert_not_called()
-        
+
         def test_validate_login_empty_username(self):
             username = ""
             password = "Password123!"
@@ -83,10 +83,12 @@ class TestValidation(unittest.TestCase):
             display_error_message = MagicMock()
             destroy = MagicMock()
 
-            validate_login(username, password, show_main_window, display_error_message, destroy)
+            validate_login(username, password, show_main_window,
+                           display_error_message, destroy)
 
             # Check if an error message is displayed
-            display_error_message.assert_called_once_with("Both username and password are required")
+            display_error_message.assert_called_once_with(
+                "Both username and password are required")
             show_main_window.assert_not_called()
             destroy.assert_not_called()
 
@@ -99,10 +101,11 @@ class TestValidation(unittest.TestCase):
         display_error_message = MagicMock()
         destroy = MagicMock()
 
-        validate_login(username, password, show_main_window, display_error_message, destroy)
+        validate_login(username, password, show_main_window,
+                       display_error_message, destroy)
 
         # Check if an error message is displayed
-        display_error_message.assert_called_once_with("Both username and password are required")
+        display_error_message.assert_called_once_with(
+            "Both username and password are required")
         show_main_window.assert_not_called()
         destroy.assert_not_called()
-

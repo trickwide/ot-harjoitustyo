@@ -108,6 +108,7 @@ def get_income_summary(conn, user_id):
     """, (user_id, "Income"))
     return cursor.fetchone()[0] or 0
 
+
 def delete_transaction(conn, transaction_id):
     """Delete a transaction by transaction_id."""
     cur = conn.cursor()
