@@ -1,6 +1,6 @@
 from tkinter import ttk, constants, StringVar
 import customtkinter
-from database.database import create_connection, add_transaction, get_transactions, get_budget_summary, get_expense_summary, get_income_summary
+from database.database import create_connection, add_transaction, get_transactions, get_budget_summary, get_expense_summary, get_income_summary, delete_transaction
 
 
 class MainWindow:
@@ -103,18 +103,77 @@ class MainWindow:
         self._total_income_label.config(
             text=f"Total Income: {self.total_income:.2f}")
 
+    def delete_transaction(self, transaction_id):
+        """Function to delete a transaction and update the history and info labels."""
+        # Delete the transaction from the database
+        delete_transaction(self.conn, transaction_id)
+
+        # Update the info labels and history section
+        self._update_info_labels()
+        self._init_history_section()
+
+    def create_delete_button(self, master, transaction_id):
+        """Function to create delete button for history section"""
+        delete_button = customtkinter.CTkButton(
+            master=master,
+            corner_radius=20,
+            text="Delete",
+            command=lambda: self.delete_transaction(transaction_id)
+        )
+        return delete_button
+
+    def _display_transaction(self, index, transaction_id, transaction_type, transaction_amount, transaction_date):
+        description_label = ttk.Label(
+            master=self._history_frame,
+            text=transaction_date
+        )
+        description_label.grid(column=0, row=index, padx=5, pady=5)
+
+        amount_label = ttk.Label(
+            master=self._history_frame,
+            text=transaction_type
+        )
+        amount_label.grid(column=1, row=index, padx=5, pady=5)
+
+        date_label = ttk.Label(
+            master=self._history_frame,
+            text=transaction_amount
+        )
+        date_label.grid(column=2, row=index, padx=5, pady=5)
+
+        # "Delete" button for each transaction
+        delete_button = self.create_delete_button(
+            master=self._history_frame,
+            transaction_id=transaction_id
+        )
+        delete_button.grid(column=4, row=index, padx=5, pady=5)
+
     def _init_history_section(self):
 
         if hasattr(self, "_history_frame"):
             self._history_frame.destroy()
 
         self._history_frame = customtkinter.CTkFrame(self._frame)
-        self.history = get_transactions(self.conn, self.user_id)
-        for i, row in enumerate(self.history):
-            transaction_type, amount, timestamp = row[2], row[3], row[4]
-            label = ttk.Label(
-                self._history_frame, text=f"{timestamp}: {transaction_type} - {amount:.2f}")
-            label.grid(row=i, column=0, padx=5, pady=5, sticky=constants.W)
+
+        transactions = get_transactions(self.conn, self.user_id)
+
+        if transactions:
+            for index, transaction in enumerate(transactions):
+                transaction_id = transaction[0]
+                transaction_type = transaction[2]
+                transaction_amount = transaction[3]
+                transaction_date = transaction[4]
+
+                # Display transaction information
+                self._display_transaction(
+                    index, transaction_id, transaction_type, transaction_amount, transaction_date)
+
+        else:
+            no_transactions_label = ttk.Label(
+                master=self._history_frame,
+                text="No transactions in the database."
+            )
+            no_transactions_label.grid(padx=5, pady=5)
 
         self._history_frame.grid(padx=5, pady=5, sticky=constants.EW)
 
