@@ -1,6 +1,6 @@
 import unittest
 import sqlite3
-from database.database import create_connection, create_tables, add_user, hash_password, get_user, add_transaction, get_transactions, get_budget_summary, get_expense_summary, get_income_summary
+from database.database import create_connection, create_tables, add_user, hash_password, get_user, add_transaction, get_transactions, get_budget_summary, get_expense_summary, get_income_summary, delete_transaction
 
 
 class TestDatabase(unittest.TestCase):
@@ -114,3 +114,34 @@ class TestDatabase(unittest.TestCase):
         income_summary = get_income_summary(self.conn, user_id)
 
         self.assertEqual(income_summary, 1000)
+
+    def test_delete_transaction(self):
+        # Initialize a temporary in-memory SQLite database for testing
+        conn = sqlite3.connect(":memory:")
+
+        # Create 'transactions' table in the database
+        conn.execute('''CREATE TABLE transactions (
+                            id INTEGER PRIMARY KEY,
+                            user_id INTEGER,
+                            type TEXT,
+                            amount REAL,
+                            date TEXT
+                        )''')
+
+        # Insert sample data into the 'transactions' table
+        sample_transactions = [(1, "Budget", 1000, "2023-04-20"),
+                               (2, "Expense", 200, "2023-04-21"),
+                               (3, "Income", 300, "2023-04-22")]
+        conn.executemany('''INSERT INTO transactions (user_id, type, amount, date)
+                            VALUES (?, ?, ?, ?)''', sample_transactions)
+        conn.commit()
+
+        # Call the delete function with transaction_id 2
+        delete_transaction(conn, 2)
+
+        # Check if the transaction was successfully deleted
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM transactions WHERE id=2")
+        deleted_transaction = cur.fetchone()
+
+        self.assertIsNone(deleted_transaction)
