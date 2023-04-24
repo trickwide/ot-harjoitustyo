@@ -1,3 +1,4 @@
+import os
 import sqlite3
 from sqlite3 import Error
 import hashlib
@@ -7,6 +8,10 @@ def create_connection(db_file):
     """ Create a database connection to a SQLite database """
     conn = None
     try:
+      # Construct an absolute path to the database file
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        db_path = os.path.join(base_dir, db_file)
+        
         conn = sqlite3.connect(db_file)
     except Error as error:
         print(error)
