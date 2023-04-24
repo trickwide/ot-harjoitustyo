@@ -16,3 +16,4 @@
 
 - User can log out from their account
 - Logging out directs user back to login screen
+- User can delete submitted transactions one by one

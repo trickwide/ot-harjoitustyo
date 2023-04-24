@@ -26,8 +26,8 @@ Alkuvaiheessa sovelluksella on vain yksi käyttäjärooli eli _normaali käyttä
   - Järjestelmään syötetty tulo näkyy vain nykyiselle kirjautuneelle käyttäjälle :heavy_check_mark:
 - Käyttäjä voi syöttää uuden menon :heavy_check_mark:
   - Järjestelmään syötetty tulo näkyy vain nykyiselle kirjautuneelle käyttäjälle :heavy_check_mark:
-- Käyttäjä voi poistaa kirjaamansa tulon
-- Käyttäjä voi poistaa kirjaamansa menon
+- Käyttäjä voi poistaa kirjaamansa tulon :heavy_check_mark:
+- Käyttäjä voi poistaa kirjaamansa menon :heavy_check_mark:
 - Käyttäjä voi kirjautua ulos järjestelmästä :heavy_check_mark:
 
 ## Jatkokehitysideoita
