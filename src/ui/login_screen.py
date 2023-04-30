@@ -26,16 +26,16 @@ class LoginScreen:
         self._init_screen()
 
     def pack(self):
-        """Function to pack the UI."""
+        """Method to pack the UI."""
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
-        """Function to destroy the UI."""
+        """Method to destroy the UI."""
         self._frame.destroy()
 
     def display_error_message(self, message):
         """
-        Display an error message for a specified duration.
+        Method to display an error message for a specified duration.
 
         Args:
             message (str): The error message to display.
@@ -51,7 +51,7 @@ class LoginScreen:
 
     def _validate_login(self, username, password, show_main_window, display_error_message, destroy):
         """
-        Validate the user's login credentials and either display an error message or show the main window.
+        Method to validate the user's login credentials and either display an error message or show the main window.
 
         Args:
             username (str): The username provided by the user.
@@ -65,7 +65,7 @@ class LoginScreen:
                        display_error_message, destroy)
 
     def _init_username_frame(self):
-        """Initialize the username frame on the login screen."""
+        """Method to initialize the username frame on the login screen."""
 
         username_label = ttk.Label(master=self._frame, text="Username")
         self._username_entry = customtkinter.CTkEntry(master=self._frame)
@@ -74,7 +74,7 @@ class LoginScreen:
         self._username_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_password_frame(self):
-        """Initialize the password frame on the login screen."""
+        """Method to initialize the password frame on the login screen."""
 
         password_label = ttk.Label(master=self._frame, text="Password")
 
@@ -85,7 +85,7 @@ class LoginScreen:
         self._password_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_screen(self):
-        """Initialize the login screen UI components."""
+        """Method to initialize the login screen UI components."""
 
         self._frame = ttk.Frame(master=self._root)
 

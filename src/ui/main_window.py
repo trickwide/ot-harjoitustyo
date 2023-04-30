@@ -29,20 +29,20 @@ class MainWindow:
         self._init_history_section()
 
     def pack(self):
-        """Function to pack the UI."""
+        """Method to pack the UI."""
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
-        """Function to destroy the UI."""
+        """Method to destroy the UI."""
         self._frame.destroy()
 
     def log_out(self):
-        """Function to log out the user, close the main window and open login window."""
+        """Method to log out the user, close the main window and open login window."""
         self.destroy()
         self._show_login_screen()
 
     def submit_value(self):
-        """Function to submit the value entered in the entry field."""
+        """Method to submit the value entered in the entry field."""
         try:
             value = float(self._entry_value.get())
             option = self._dropdown.get()
@@ -54,7 +54,7 @@ class MainWindow:
             pass
 
     def _init_dropdown(self):
-        """Function to initialize the dropdown menu."""
+        """Method to initialize the dropdown menu."""
 
         choices = ["Budget", "Income", "Expense"]
 
@@ -64,7 +64,7 @@ class MainWindow:
         self._dropdown.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_entry_field(self):
-        """Function to initialize the entry field."""
+        """Method to initialize the entry field."""
 
         self._entry_value = StringVar()
         self._entry = customtkinter.CTkEntry(
@@ -72,14 +72,14 @@ class MainWindow:
         self._entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_submit_button(self):
-        """Function to initialize the submit button."""
+        """Method to initialize the submit button."""
 
         self._submit_button = customtkinter.CTkButton(
             master=self._frame, corner_radius=20, text="Submit", command=self.submit_value)
         self._submit_button.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_info_labels(self):
-        """Function to initialize the info labels."""
+        """Method to initialize the info labels."""
 
         self._initial_budget_label = ttk.Label(
             self._frame, text=f"Initial Budget: {self.initial_budget:.2f}")
@@ -96,7 +96,7 @@ class MainWindow:
         self._total_income_label.grid(padx=5, pady=5, sticky=constants.W)
 
     def _update_info_labels(self):
-        """Function to update the info labels."""
+        """Method to update the info labels."""
 
         self.initial_budget = get_budget_summary(self.conn, self.user_id)
         self.total_expense = get_expense_summary(self.conn, self.user_id)
@@ -115,16 +115,26 @@ class MainWindow:
             text=f"Total Income: {self.total_income:.2f}")
 
     def delete_transaction(self, transaction_id):
-        """Function to delete a transaction and update the history and info labels after deletion."""
-        # Delete the transaction from the database
+        """
+        Method to delete a transaction and update the history and info labels after deletion.
+
+        Args:
+            transaction_id (int): ID of the transaction.
+        """
+
         delete_transaction(self.conn, transaction_id)
 
-        # Update the info labels and history section
         self._update_info_labels()
         self._init_history_section()
 
     def create_delete_button(self, master, transaction_id):
-        """Function to create delete button for history section"""
+        """
+        Method to create delete button for history section.
+
+        Args:
+            master (tkinter.Frame): The frame in which the button will be placed.
+            transaction_id (int): ID of the transaction.
+        """
 
         delete_button = customtkinter.CTkButton(
             master=master,
@@ -135,7 +145,16 @@ class MainWindow:
         return delete_button
 
     def _display_transaction(self, index, transaction_id, transaction_type, transaction_amount, transaction_date):
-        """Function to display a transaction in the history section."""
+        """
+        Method to display a transaction in the history section.
+
+        Args: 
+            index (int): Index of the transaction in the history section.
+            transaction_id (int): ID of the transaction.
+            transaction_type (str): Type of the transaction.
+            transaction_amount (float): Amount of the transaction.
+            transaction_date (str): Date of the transaction.
+        """
 
         description_label = ttk.Label(
             master=self._history_frame,
@@ -155,7 +174,6 @@ class MainWindow:
         )
         date_label.grid(column=2, row=index, padx=5, pady=5)
 
-        # "Delete" button for each transaction
         delete_button = self.create_delete_button(
             master=self._history_frame,
             transaction_id=transaction_id
@@ -163,7 +181,7 @@ class MainWindow:
         delete_button.grid(column=4, row=index, padx=5, pady=5)
 
     def _init_history_section(self):
-        """Function to initialize the history section."""
+        """Method to initialize the history section."""
 
         if hasattr(self, "_history_frame"):
             self._history_frame.destroy()
@@ -179,7 +197,6 @@ class MainWindow:
                 transaction_amount = transaction[3]
                 transaction_date = transaction[4]
 
-                # Display transaction information
                 self._display_transaction(
                     index, transaction_id, transaction_type, transaction_amount, transaction_date)
 
@@ -193,14 +210,14 @@ class MainWindow:
         self._history_frame.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_log_out_button(self):
-        """Function to initialize the log out button."""
+        """Method to initialize the log out button."""
 
         self._log_out_button = customtkinter.CTkButton(
             master=self._frame, corner_radius=20, text="Log Out", command=self.log_out)
         self._log_out_button.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_screen(self):
-        """Function to initialize the UI components of main window"""
+        """Method to initialize the UI components of main window"""
 
         self._frame = ttk.Frame(master=self._root)
         self._init_dropdown()

@@ -26,16 +26,16 @@ class RegistrationScreen:
         self._init_screen()
 
     def pack(self):
-        """Function to pack the UI."""
+        """Method to pack the UI."""
         self._frame.pack(fill=constants.X)
 
     def destroy(self):
-        """Function to destroy the UI."""
+        """Method to destroy the UI."""
         self._frame.destroy()
 
     def display_error_message(self, message):
         """
-        Display an error message for a specified duration.
+        Method to display an error message for a specified duration.
 
         Args:
             message (str): The error message to display.
@@ -50,7 +50,7 @@ class RegistrationScreen:
         self._root.after(5000, self._error_label.destroy)
 
     def validate_registration(self):
-        """Function to validate the user's registration credentials."""
+        """Method to validate the user's registration credentials."""
 
         username = self._username_entry.get()
         password = self._password_entry.get()
@@ -84,7 +84,7 @@ class RegistrationScreen:
             self._show_login_view()
 
     def _init_username_frame(self):
-        """Initialize the username frame on the registration screen."""
+        """Method to initialize the username frame on the registration screen."""
 
         username_label = ttk.Label(master=self._frame, text="Username")
         self._username_entry = customtkinter.CTkEntry(master=self._frame)
@@ -93,7 +93,7 @@ class RegistrationScreen:
         self._username_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_password_frame(self):
-        """Initialize the password frame on the registration screen."""
+        """Method to initialize the password frame on the registration screen."""
 
         password_label = ttk.Label(master=self._frame, text="Password")
         self._password_entry = customtkinter.CTkEntry(
@@ -112,7 +112,7 @@ class RegistrationScreen:
             padx=5, pady=5, sticky=constants.EW)
 
     def _init_screen(self):
-        """Initialize the registration screen UI components."""
+        """Method to initialize the registration screen UI components."""
 
         self._frame = ttk.Frame(master=self._root)
 

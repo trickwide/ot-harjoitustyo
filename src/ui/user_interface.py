@@ -16,11 +16,11 @@ class UI:
         self._current_view = None
 
     def start(self):
-        """Function to start the UI."""
+        """Method to start the UI."""
         self._show_registration_screen()
 
     def _hide_current_view(self):
-        """Function to hide the current view"""
+        """Method to hide the current view"""
 
         if self._current_view:
             self._current_view.destroy()
@@ -28,7 +28,7 @@ class UI:
         self._current_view = None
 
     def _show_login_screen(self):
-        """Function to hide the current view and show the login screen."""
+        """Method to hide the current view and show the login screen."""
 
         self._hide_current_view()
         self._current_view = LoginScreen(
@@ -36,7 +36,7 @@ class UI:
         self._current_view.pack()
 
     def _show_registration_screen(self):
-        """Function to hide the current view and show the registration screen."""
+        """Method to hide the current view and show the registration screen."""
 
         self._hide_current_view()
         self._current_view = RegistrationScreen(
@@ -44,7 +44,7 @@ class UI:
         self._current_view.pack()
 
     def _show_main_window(self, user_id):
-        """Function to hide the current view and show the main window.
+        """Method to hide the current view and show the main window.
 
         Args:
             user_id: The id of the user.
