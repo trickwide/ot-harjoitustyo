@@ -12,6 +12,7 @@ class RegistrationScreen:
 
         Args:
             root (tk.Tk): The root of the UI.
+            show_login_view (function): The function to display the login view.
         """
 
         self._root = root
@@ -33,6 +34,13 @@ class RegistrationScreen:
         self._frame.destroy()
 
     def display_error_message(self, message):
+        """
+        Display an error message for a specified duration.
+
+        Args:
+            message (str): The error message to display.
+        """
+
         if self._error_label:
             self._error_label.destroy()
 
@@ -43,6 +51,7 @@ class RegistrationScreen:
 
     def validate_registration(self):
         """Function to validate the user's registration credentials."""
+
         username = self._username_entry.get()
         password = self._password_entry.get()
         password_confirmation = self._password_confirmation_entry.get()
@@ -61,10 +70,8 @@ class RegistrationScreen:
             self.display_error_message("Passwords do not match.")
             return
 
-        # Hash the password
         password_hash = hash_password(password)
 
-        # Insert the user into database
         conn = create_connection("budget_tracker.db")
         result = add_user(conn, username, password_hash)
         conn.close()
@@ -73,11 +80,12 @@ class RegistrationScreen:
             self.display_error_message("Username already exists.")
             return
         else:
-            # Destroy the registration screen and show the login screen
             self.destroy()
             self._show_login_view()
 
     def _init_username_frame(self):
+        """Initialize the username frame on the registration screen."""
+
         username_label = ttk.Label(master=self._frame, text="Username")
         self._username_entry = customtkinter.CTkEntry(master=self._frame)
 
@@ -85,6 +93,8 @@ class RegistrationScreen:
         self._username_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_password_frame(self):
+        """Initialize the password frame on the registration screen."""
+
         password_label = ttk.Label(master=self._frame, text="Password")
         self._password_entry = customtkinter.CTkEntry(
             master=self._frame, show="*")
@@ -102,6 +112,8 @@ class RegistrationScreen:
             padx=5, pady=5, sticky=constants.EW)
 
     def _init_screen(self):
+        """Initialize the registration screen UI components."""
+
         self._frame = ttk.Frame(master=self._root)
 
         self._init_username_frame()
@@ -111,7 +123,6 @@ class RegistrationScreen:
             master=self._frame, corner_radius=20, text="Register", command=self.validate_registration)
         register_button.grid(padx=5, pady=5, sticky=constants.EW)
 
-        # Note to self, add command to the login button and functionality
         already_registered_button = customtkinter.CTkButton(
             master=self._frame, corner_radius=20, text="Already Registered? Sign in.", command=self._show_login_view)
         already_registered_button.grid(

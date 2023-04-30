@@ -11,6 +11,8 @@ class LoginScreen:
 
         Args:
             root (tk.Tk): The root of the UI.
+            show_registration_view (function): The function to display the registration view.
+            show_main_window (function): The function to display the main window.
         """
         self._root = root
         self._show_registration_view = show_registration_view
@@ -32,6 +34,13 @@ class LoginScreen:
         self._frame.destroy()
 
     def display_error_message(self, message):
+        """
+        Display an error message for a specified duration.
+
+        Args:
+            message (str): The error message to display.
+        """
+
         if self._error_label:
             self._error_label.destroy()
 
@@ -41,10 +50,23 @@ class LoginScreen:
         self._root.after(5000, self._error_label.destroy)
 
     def _validate_login(self, username, password, show_main_window, display_error_message, destroy):
+        """
+        Validate the user's login credentials and either display an error message or show the main window.
+
+        Args:
+            username (str): The username provided by the user.
+            password (str): The password provided by the user.
+            show_main_window (callable): A function to display the main window after successful login.
+            display_error_message (callable): A function to display an error message when login credentials are invalid.
+            destroy (callable): A function to destroy the login screen.
+        """
+
         validate_login(username, password, show_main_window,
                        display_error_message, destroy)
 
     def _init_username_frame(self):
+        """Initialize the username frame on the login screen."""
+
         username_label = ttk.Label(master=self._frame, text="Username")
         self._username_entry = customtkinter.CTkEntry(master=self._frame)
 
@@ -52,6 +74,8 @@ class LoginScreen:
         self._username_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_password_frame(self):
+        """Initialize the password frame on the login screen."""
+
         password_label = ttk.Label(master=self._frame, text="Password")
 
         self._password_entry = customtkinter.CTkEntry(
@@ -61,6 +85,8 @@ class LoginScreen:
         self._password_entry.grid(padx=5, pady=5, sticky=constants.EW)
 
     def _init_screen(self):
+        """Initialize the login screen UI components."""
+
         self._frame = ttk.Frame(master=self._root)
 
         self._init_username_frame()
