@@ -39,7 +39,7 @@ Perusversion valmistumisen jälkeen järjestelmää täydennetään ajan sallies
 - Näkymä, joka näyttää vain tulot tai menot
 - Budjettien nimeäminen ja budjettien välillä vaihtaminen
 - Salasanan muokkaaminen
-- Käyttäjätunnuksen (ja siihen liittyvien budjettien) poisto
+- Käyttäjätunnuksen (ja siihen liittyvien budjettien) poisto :heavy_check_mark:
 - Tulojen ja menojen syöttäminen toisille käyttäjille (pääkäyttäjä-ominaisuus)
 - Käyttäjien yhdistäminen ryhmiin (pääkäyttäjä-ominaisuus)
 - Ryhmäkohtainen budjettinäkymä (pääkäyttäjä-ominaisuus)
