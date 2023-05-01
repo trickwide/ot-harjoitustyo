@@ -230,7 +230,19 @@ def delete_transaction(conn, transaction_id):
     cur = conn.cursor()
     cur.execute("DELETE FROM transactions WHERE id=?", (transaction_id,))
     conn.commit()
-
+    
+def delete_account(conn, user_id):
+    """
+    Delete a user account and all transactions associated to that user from the database.
+    
+    Args:
+        conn (sqlite3.Connection): The connection object to the SQLite database.
+        user_id (int): The ID of the user.
+    """
+    cur = conn.cursor()
+    cur.execute("DELETE FROM transactions WHERE user_id=?", (user_id,))
+    cur.execute("DELETE FROM users WHERE id=?", (user_id,))
+    conn.commit()
 
 def setup_database(db_file):
     """
