@@ -1,6 +1,6 @@
 import unittest
 import sqlite3
-from database.database import create_connection, create_tables, add_user, hash_password, get_user, add_transaction, get_transactions, get_budget_summary, get_expense_summary, get_income_summary, delete_transaction
+from database.database import create_connection, create_tables, add_user, hash_password, get_user, add_transaction, get_transactions, get_budget_summary, get_expense_summary, get_income_summary, delete_transaction, delete_account
 
 
 class TestDatabase(unittest.TestCase):
@@ -9,7 +9,7 @@ class TestDatabase(unittest.TestCase):
         self.conn = create_connection(":memory:")
         create_tables(self.conn)
 
-    def closeConnection(self):
+    def tearDown(self):
         self.conn.close()
 
     def test_add_user(self):
@@ -116,32 +116,40 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(income_summary, 1000)
 
     def test_delete_transaction(self):
-        # Initialize a temporary in-memory SQLite database for testing
-        conn = sqlite3.connect(":memory:")
-
-        # Create 'transactions' table in the database
-        conn.execute('''CREATE TABLE transactions (
-                            id INTEGER PRIMARY KEY,
-                            user_id INTEGER,
-                            type TEXT,
-                            amount REAL,
-                            date TEXT
-                        )''')
-
-        # Insert sample data into the 'transactions' table
-        sample_transactions = [(1, "Budget", 1000, "2023-04-20"),
-                               (2, "Expense", 200, "2023-04-21"),
-                               (3, "Income", 300, "2023-04-22")]
-        conn.executemany('''INSERT INTO transactions (user_id, type, amount, date)
-                            VALUES (?, ?, ?, ?)''', sample_transactions)
-        conn.commit()
-
-        # Call the delete function with transaction_id 2
-        delete_transaction(conn, 2)
-
-        # Check if the transaction was successfully deleted
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM transactions WHERE id=2")
+        user_id = add_user(self.conn, "test_user", hash_password("Password123!"))
+        
+        sample_transactions = [(user_id, "Budget", 1000, "2023-04-20"),
+                               (user_id, "Expense", 200, "2023-04-21"),
+                               (user_id, "Income", 300, "2023-04-22")]
+        
+        self.conn.executemany("INSERT INTO transactions (user_id, type, amount, timestamp) VALUES (?, ?, ?, ?)", sample_transactions)
+        self.conn.commit()
+        
+        cur = self.conn.cursor()
+        cur.execute("SELECT id FROM transactions WHERE user_id=? AND type='Income'", (user_id,))
+        transaction_id = cur.fetchone()[0]
+        
+        delete_transaction(self.conn, transaction_id)
+        
+        cur.execute("SELECT * FROM transactions WHERE id=?", (transaction_id,))
         deleted_transaction = cur.fetchone()
 
         self.assertIsNone(deleted_transaction)
+
+    def test_delete_account(self):
+        self.user_id = add_user(self.conn, "test_user", "Password123!")
+        add_transaction(self.conn, self.user_id, "Budget", 1000)
+        add_transaction(self.conn, self.user_id, "Income", 500)
+        add_transaction(self.conn, self.user_id, "Expense", 200)
+        
+        delete_account(self.conn, self.user_id)
+        
+        cur = self.conn.cursor()
+        cur.execute("SELECT * FROM users WHERE id=?", (self.user_id,))
+        user = cur.fetchone()
+        self.assertIsNone(user)
+        
+        cur.execute("SELECT * FROM transactions WHERE user_id=?", (self.user_id,))
+        transactions = cur.fetchall()
+        self.assertEqual(len(transactions), 0)
+
