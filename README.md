@@ -10,6 +10,8 @@ Sovelluksen käyttäminen vaatii vähintään Python-version `3.8`. Sovelluksen 
 
 ## Dokumentaatio
 
+- [Käyttöohje](dokumentaatio/kayttoohje.md)
+
 - [Vaatimusmäärittely](dokumentaatio/vaatimusmaarittely.md)
 
 - [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
