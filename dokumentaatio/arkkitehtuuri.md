@@ -60,6 +60,18 @@ sequenceDiagram
 
 ### Käyttäjän kirjautuminen
 
+```mermaid
+sequenceDiagram
+    Login_screen->>Validation: validate_login(username, password)
+    Validation->>Database: get_user(conn, username, password_hash)
+    Database-->>Validation: user (if exists) or None
+    alt user exists and password is correct
+        Validation-->>Login_screen: show_main_window(user_id)
+    else user doesn't exist or password is incorrect
+        Validation-->>Login_screen: display_error_message("Invalid username or password")
+    end
+```
+
 ### Tietojen syöttäminen
 
 ### Tietojen poistaminen
