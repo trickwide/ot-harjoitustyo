@@ -2,9 +2,29 @@
 
 ## Rakenne
 
-![Pakkausrakenne](./kuvat/arkkitehtuuri-pakkaus.png)
+Ohjelman rakenne noudattaa kaksitasoista kerrosarkkitehtuuria, ja koodin pakkausrakenne on seuraavanlainen:
 
-## Uuden käyttäjän rekisteröinti
+![Pakkausrakenne](./kuvat/arkkitehtuuri-pakkaus.PNG)
+
+Pakkaus _ui_ sisältää käyttöliittymästä, _database_ tietojen pysyväistallennuksesta ja _validation_ tietojen tarkistuksesta vastaavan koodin.
+
+## Käyttöliittymä
+
+Käyttöliittymä sisältää kolme erillistä näkymää:
+
+- Rekisteröitymisnäkymä
+- Kirjautumisnäkymä
+- Päänäkymä ts. tietojen syöttö- ja tarkastelunäkymä
+
+Jokainen käyttöliittymän näkymä on toteutettu omana luokkanaan. Vain yksi luokka on kerrallaan näkyvänä. Näkymien näyttämisesta vastaa [UI](../src/ui/user_interface.py)-luokka. Käyttöliittymä on pyritty eristämään täysin sovelluslogiikasta ja se kutsuu [database](../src/database/database.py) ja [validation](../src/validation/validation.py)-pakkauksien funktioita.
+
+## Tietojen pysyväistallennus
+
+Pakkauksen _database_ [database.py](../src/database/database.py)-tiedosto huolehtii tietojen tallentamisesta SQLite-tietokantaan.
+
+## Päätoiminnallisuudet
+
+### Uuden käyttäjän rekisteröinti
 
 ```mermaid
 sequenceDiagram
@@ -37,3 +57,9 @@ sequenceDiagram
         Registration_screen->>User: show_login_view()
     end
 ```
+
+### Käyttäjän kirjautuminen
+
+### Tietojen syöttäminen
+
+### Tietojen poistaminen
