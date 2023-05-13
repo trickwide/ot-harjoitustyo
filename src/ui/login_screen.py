@@ -1,6 +1,7 @@
 from tkinter import ttk, constants
+from CTkMessagebox import CTkMessagebox
 import customtkinter
-from validation.validation import validate_login
+from services.user_services import UserService
 
 
 class LoginScreen:
@@ -17,12 +18,10 @@ class LoginScreen:
         self._root = root
         self._show_registration_view = show_registration_view
         self._show_main_window = show_main_window
-        self.validate_login = validate_login
         self._frame = None
         self._username_entry = None
         self._password_entry = None
         self._error_label = None
-
         self._init_screen()
 
     def pack(self):
@@ -41,13 +40,7 @@ class LoginScreen:
             message (str): The error message to display.
         """
 
-        if self._error_label:
-            self._error_label.destroy()
-
-        self._error_label = ttk.Label(
-            master=self._frame, text=message, foreground="red")
-        self._error_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._root.after(5000, self._error_label.destroy)
+        CTkMessagebox(title="Login error", message=message, icon="cancel")
 
     def _validate_login(self, username, password, show_main_window, display_error_message, destroy):
         """
@@ -61,8 +54,13 @@ class LoginScreen:
             destroy (callable): A function to destroy the login screen.
         """
 
-        validate_login(username, password, show_main_window,
-                       display_error_message, destroy)
+        user_id = UserService.validate_user_credentials(username, password)
+
+        if user_id is not None:
+            show_main_window(user_id)
+            destroy()
+        else:
+            display_error_message("Invalid username or password.")
 
     def _init_username_frame(self):
         """Method to initialize the username frame on the login screen."""

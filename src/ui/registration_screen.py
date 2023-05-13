@@ -1,7 +1,7 @@
 from tkinter import ttk, constants
+from CTkMessagebox import CTkMessagebox
 import customtkinter
-from database.database import create_connection, add_user, hash_password
-from validation.validation import is_username_valid, is_password_valid
+from services.user_services import UserService
 
 
 class RegistrationScreen:
@@ -41,13 +41,8 @@ class RegistrationScreen:
             message (str): The error message to display.
         """
 
-        if self._error_label:
-            self._error_label.destroy()
-
-        self._error_label = ttk.Label(
-            master=self._frame, text=message, foreground="red")
-        self._error_label.grid(padx=5, pady=5, sticky=constants.W)
-        self._root.after(5000, self._error_label.destroy)
+        CTkMessagebox(title="Registration error",
+                      message=message, icon="cancel")
 
     def validate_registration(self):
         """Method to validate the user's registration credentials."""
@@ -56,29 +51,11 @@ class RegistrationScreen:
         password = self._password_entry.get()
         password_confirmation = self._password_confirmation_entry.get()
 
-        if not is_username_valid(username):
-            self.display_error_message(
-                "Username must be at least 4 characters long.")
-            return
+        success, message = UserService.register_user(
+            username, password, password_confirmation)
 
-        if not is_password_valid(password):
-            self.display_error_message(
-                "Password must contain at least 12 characters, with 1 capital letter, 1 number, and 1 special character.")
-            return
-
-        if password != password_confirmation:
-            self.display_error_message("Passwords do not match.")
-            return
-
-        password_hash = hash_password(password)
-
-        conn = create_connection("budget_tracker.db")
-        result = add_user(conn, username, password_hash)
-        conn.close()
-
-        if result == "UserExists":
-            self.display_error_message("Username already exists.")
-            return
+        if not success:
+            self.display_error_message(message)
         else:
             self.destroy()
             self._show_login_view()

@@ -144,20 +144,21 @@ class MainWindow:
             command=lambda: self.delete_transaction(transaction_id)
         )
         return delete_button
-    
+
     def delete_account(self):
         """Method to delete the user account."""
-        
-        message = CTkMessagebox(title="Delete Account?", message="Are you sure you want to delete your account?", option_1="No", option_2="Yes")
+
+        message = CTkMessagebox(
+            title="Delete Account?", message="Are you sure you want to delete your account?", option_1="No", option_2="Yes")
         response = message.get()
-        
+
         if response == "Yes":
             delete_account(self.conn, self.user_id)
             self.log_out()
-    
+
     def _init_delete_account_button(self):
         """Method to initialize the delete account button."""
-        
+
         self._delete_account_button = customtkinter.CTkButton(
             master=self._frame, corner_radius=20, text="Delete Account", command=self.delete_account)
         self._delete_account_button.grid(padx=5, pady=5, sticky=constants.EW)

@@ -116,21 +116,24 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(income_summary, 1000)
 
     def test_delete_transaction(self):
-        user_id = add_user(self.conn, "test_user", hash_password("Password123!"))
-        
+        user_id = add_user(self.conn, "test_user",
+                           hash_password("Password123!"))
+
         sample_transactions = [(user_id, "Budget", 1000, "2023-04-20"),
                                (user_id, "Expense", 200, "2023-04-21"),
                                (user_id, "Income", 300, "2023-04-22")]
-        
-        self.conn.executemany("INSERT INTO transactions (user_id, type, amount, timestamp) VALUES (?, ?, ?, ?)", sample_transactions)
+
+        self.conn.executemany(
+            "INSERT INTO transactions (user_id, type, amount, timestamp) VALUES (?, ?, ?, ?)", sample_transactions)
         self.conn.commit()
-        
+
         cur = self.conn.cursor()
-        cur.execute("SELECT id FROM transactions WHERE user_id=? AND type='Income'", (user_id,))
+        cur.execute(
+            "SELECT id FROM transactions WHERE user_id=? AND type='Income'", (user_id,))
         transaction_id = cur.fetchone()[0]
-        
+
         delete_transaction(self.conn, transaction_id)
-        
+
         cur.execute("SELECT * FROM transactions WHERE id=?", (transaction_id,))
         deleted_transaction = cur.fetchone()
 
@@ -141,15 +144,15 @@ class TestDatabase(unittest.TestCase):
         add_transaction(self.conn, self.user_id, "Budget", 1000)
         add_transaction(self.conn, self.user_id, "Income", 500)
         add_transaction(self.conn, self.user_id, "Expense", 200)
-        
+
         delete_account(self.conn, self.user_id)
-        
+
         cur = self.conn.cursor()
         cur.execute("SELECT * FROM users WHERE id=?", (self.user_id,))
         user = cur.fetchone()
         self.assertIsNone(user)
-        
-        cur.execute("SELECT * FROM transactions WHERE user_id=?", (self.user_id,))
+
+        cur.execute("SELECT * FROM transactions WHERE user_id=?",
+                    (self.user_id,))
         transactions = cur.fetchall()
         self.assertEqual(len(transactions), 0)
-
