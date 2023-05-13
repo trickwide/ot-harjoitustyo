@@ -20,7 +20,7 @@ Sovelluksen käyttäminen vaatii vähintään Python-version `3.8`. Sovelluksen 
 
 - [Changelog](dokumentaatio/changelog.md)
 
-- [Release](https://github.com/trickwide/ot-harjoitustyo/releases/tag/viikko5)
+- [Releases](https://github.com/trickwide/ot-harjoitustyo/releases)
 
 ## Asennus
 
