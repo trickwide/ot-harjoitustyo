@@ -4,7 +4,7 @@
 
 Ohjelman rakenne noudattaa kolmitasoista kerrosarkkitehtuuria, ja koodin pakkausrakenne on seuraavanlainen:
 
-![Pakkausrakenne](./kuvat/arkkitehtuuri-pakkaus.PNG)
+![Pakkausrakenne](./kuvat/arkkitehtuuri-pakkaus.png)
 
 Pakkaus _ui_ sisältää käyttöliittymästä, _database_ tietojen pysyväistallennuksesta ja _services_ tietojen tarkistuksesta vastaavan koodin.
 
