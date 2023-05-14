@@ -17,9 +17,6 @@ def create_connection(db_file):
 
     conn = None
     try:
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        db_path = os.path.join(base_dir, db_file)
-
         conn = sqlite3.connect(db_file)
     except Error as error:
         print(error)
