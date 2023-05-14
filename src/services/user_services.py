@@ -1,4 +1,5 @@
-from database.database import create_connection, add_user, hash_password, get_user
+from database.database import add_user, hash_password, get_user
+from services.connection_services import get_db_connection
 import re
 
 
@@ -63,7 +64,7 @@ class UserService:
 
         password_hash = hash_password(password)
 
-        conn = create_connection("budget_tracker.db")
+        conn = get_db_connection()
         result = add_user(conn, username, password_hash)
         conn.close()
 
@@ -86,7 +87,7 @@ class UserService:
 
         password_hash = hash_password(password)
 
-        conn = create_connection("budget_tracker.db")
+        conn = get_db_connection()
 
         user = get_user(conn, username, password_hash)
 

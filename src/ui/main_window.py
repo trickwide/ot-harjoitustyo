@@ -1,7 +1,8 @@
 from tkinter import ttk, constants, StringVar, messagebox
 from CTkMessagebox import CTkMessagebox
 import customtkinter
-from database.database import create_connection, add_transaction, get_transactions, get_budget_summary, get_expense_summary, get_income_summary, delete_transaction, delete_account
+from database.database import add_transaction, get_transactions, get_budget_summary, get_expense_summary, get_income_summary, delete_transaction, delete_account
+from services.connection_services import get_db_connection
 
 
 class MainWindow:
@@ -24,7 +25,7 @@ class MainWindow:
         self.total_income = 0.0
         self.user_id = user_id
         self._show_login_screen = show_login_screen
-        self.conn = create_connection("budget_tracker.db")
+        self.conn = get_db_connection()
         self._init_screen()
         self._update_info_labels()
         self._init_history_section()

@@ -32,3 +32,30 @@ class TestUserService(unittest.TestCase):
 
     def test_is_password_valid_no_special_character(self):
         self.assertFalse(UserService.is_password_valid("Password1234"))
+
+    def test_register_user_too_short_username(self):
+        result = UserService.register_user(
+            "usr", "Password123!", "Password123!")
+        self.assertEqual(
+            (False, 'Username must be at least 5 characters long.'), result)
+
+    def test_register_user_invalid_password(self):
+        result = UserService.register_user(
+            "username", "Password123", "Password123")
+        self.assertEqual(
+            (False, 'Password must contain at least 12 characters, with 1 capital letter, 1 number, and 1 special character.'), result)
+
+    def test_register_user_passwords_dont_match(self):
+        result = UserService.register_user(
+            "username", "Password123!", "Password123")
+        self.assertEqual((False, 'Passwords do not match.'), result)
+
+    def test_register_user_username_already_exists(self):
+        result = UserService.register_user(
+            "username", "Password123!", "Password123!")
+        self.assertEqual((False, "Username already exists."), result)
+
+    def test_register_user_success(self):
+        result = UserService.register_user(
+            "username", "Password123!", "Password123!")
+        self.assertEqual((True, None), result)
