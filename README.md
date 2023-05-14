@@ -16,6 +16,8 @@ Sovelluksen käyttäminen vaatii vähintään Python-version `3.8`. Sovelluksen 
 
 - [Arkkitehtuurikuvaus](dokumentaatio/arkkitehtuuri.md)
 
+- [Testausdokumentti](dokumentaatio/testaus.md)
+
 - [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
 
 - [Changelog](dokumentaatio/changelog.md)
