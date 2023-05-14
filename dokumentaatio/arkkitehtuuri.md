@@ -2,11 +2,11 @@
 
 ## Rakenne
 
-Ohjelman rakenne noudattaa kaksitasoista kerrosarkkitehtuuria, ja koodin pakkausrakenne on seuraavanlainen:
+Ohjelman rakenne noudattaa kolmitasoista kerrosarkkitehtuuria, ja koodin pakkausrakenne on seuraavanlainen:
 
 ![Pakkausrakenne](./kuvat/arkkitehtuuri-pakkaus.PNG)
 
-Pakkaus _ui_ sisältää käyttöliittymästä, _database_ tietojen pysyväistallennuksesta ja _validation_ tietojen tarkistuksesta vastaavan koodin.
+Pakkaus _ui_ sisältää käyttöliittymästä, _database_ tietojen pysyväistallennuksesta ja _services_ tietojen tarkistuksesta vastaavan koodin.
 
 ## Käyttöliittymä
 
@@ -16,7 +16,7 @@ Käyttöliittymä sisältää kolme erillistä näkymää:
 - Kirjautumisnäkymä
 - Päänäkymä ts. tietojen syöttö- ja tarkastelunäkymä
 
-Jokainen käyttöliittymän näkymä on toteutettu omana luokkanaan. Vain yksi luokka on kerrallaan näkyvänä. Näkymien näyttämisesta vastaa [UI](../src/ui/user_interface.py)-luokka. Käyttöliittymä on pyritty eristämään täysin sovelluslogiikasta ja se kutsuu [database](../src/database/database.py) ja [validation](../src/validation/validation.py)-pakkauksien funktioita.
+Jokainen käyttöliittymän näkymä on toteutettu omana luokkanaan. Vain yksi luokka on kerrallaan näkyvänä. Näkymien näyttämisesta vastaa [UI](../src/ui/user_interface.py)-luokka. Käyttöliittymä on pyritty eristämään täysin sovelluslogiikasta ja se kutsuu [database](../src/database/database.py) ja [services](../src/services/)-pakkauksien funktioita.
 
 ## Tietojen pysyväistallennus
 
@@ -74,4 +74,32 @@ sequenceDiagram
 
 ### Tietojen syöttäminen
 
+```mermaid
+sequenceDiagram
+    User->>MainWindow: Select Option from Dropdown
+    User->>MainWindow: Enter Value in Entry Field
+    User->>MainWindow: Click Submit Button
+    MainWindow->>Database: add_transaction
+    MainWindow->>Database: get_budget_summary
+    Database-->>MainWindow: Return budget_summary
+    MainWindow->>Database: get_expense_summary
+    Database-->>MainWindow: Return expense_summary
+    MainWindow->>Database: get_income_summary
+    Database-->>MainWindow: Return income_summary
+    MainWindow-->>User: Update MainWindow
+```
+
 ### Tietojen poistaminen
+
+```mermaid
+sequenceDiagram
+    User->>MainWindow: Click on Delete Button in Transaction History
+    MainWindow->>Database: delete_transaction
+    MainWindow->>Database: get_budget_summary
+    Database-->>MainWindow: Return budget_summary
+    MainWindow->>Database: get_expense_summary
+    Database-->>MainWindow: Return expense_summary
+    MainWindow->>Database: get_income_summary
+    Database-->>MainWindow: Return income_summary
+    MainWindow-->>User: Update MainWindow
+```
